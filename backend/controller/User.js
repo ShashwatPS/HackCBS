@@ -168,7 +168,7 @@ const sellerInfoFill = async (req, res) => {
         const seller = await SearchSeller.save();
         console.log(uploadedImageURL, "uploadedImages");
         try {
-            const response = await fetch("http://127.0.0.1:8000/classify-scrap/", {
+            const response = await fetch("http://ec2-3-7-253-190.ap-south-1.compute.amazonaws.com:8000/classify-scrap/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(uploadedImages),
@@ -260,7 +260,7 @@ const giveFeedback = async (req, res) => {
 
         const product = await Product.findById(Pid);
 
-        // const sentimentResponse = await axios.post('http://127.0.0.1:8000/analyze-feedback/', {
+        // const sentimentResponse = await axios.post('http://ec2-3-7-253-190.ap-south-1.compute.amazonaws.com:8000/analyze-feedback/', {
         //     feedback: feedback,
         //     vendor_id: product.vendor_id
         // });
@@ -268,7 +268,7 @@ const giveFeedback = async (req, res) => {
             text: feedback,
         }
         console.log("Found product",sendedFeedback);
-        const sentimentResponse = await fetch('http://127.0.0.1:8000/analyze-feedback/', {
+        const sentimentResponse = await fetch('http://ec2-3-7-253-190.ap-south-1.compute.amazonaws.com:8000/analyze-feedback/', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
