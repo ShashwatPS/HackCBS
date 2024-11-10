@@ -10,6 +10,7 @@ from io import BytesIO
 import requests
 import geocoder
 import google.generativeai as genai
+from fastapi.middleware.cors import CORSMiddleware
 
 # Configure the Generative AI API
 os.environ["API_KEY"] = "AIzaSyBkidkQ81wlIwzhwMeYDX8ZrNyjlARPRfI"  # Replace with your actual API key
@@ -86,6 +87,15 @@ RECYCLING_RULES = {
 
 # Initialize the FastAPI app
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins, change to specific domain(s) in production for security
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all HTTP methods
+    allow_headers=["*"],  # Allows all headers
+)
+
 
 # Define input data models
 class Feedback(BaseModel):
